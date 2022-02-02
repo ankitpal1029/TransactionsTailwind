@@ -3,6 +3,7 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { Loader } from "./";
 import { useTransactionContext } from "../context/TransactionContext";
+import { ShortenAddress } from "../utils/shortenAddress";
 
 const commonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -93,7 +94,11 @@ const Welcome = () => {
                 <BsInfoCircle fontSize={17} color="#fff" />
               </div>
               <div>
-                <p className="text-white font-light text-sm">0xWalletAddress</p>
+                <p className="text-white font-light text-sm">
+                  {connectedAccount
+                    ? ShortenAddress(connectedAccount)
+                    : "0xWalletAddress"}
+                </p>
                 <p className="text-white font-semibold text-sm">Ethereum</p>
               </div>
             </div>
