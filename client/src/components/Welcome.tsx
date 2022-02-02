@@ -1,13 +1,8 @@
-import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
 import { Loader } from "./";
-import { useContext } from "react";
-import {
-  TransactionContext,
-  useTransactionContext,
-} from "../context/TransactionContext";
+import { useTransactionContext } from "../context/TransactionContext";
 
 const commonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
@@ -16,13 +11,13 @@ const Input = ({
   placeholder,
   name,
   type,
-  value,
+  // value,
   handleChange,
 }: {
   placeholder: string;
   name: string;
   type: string;
-  value: string;
+  // value: string;
   handleChange: Function;
 }) => {
   return (
@@ -30,7 +25,7 @@ const Input = ({
       placeholder={placeholder}
       type={type}
       step="0.0001"
-      value={value}
+      // value={value}
       onChange={(e) => handleChange(e, name)}
       className="my-2 w-full rounded-sm p-2 outline-none bg-transparent text-white border-none text-sm white-glassmorphism"
     />
@@ -38,11 +33,23 @@ const Input = ({
 };
 
 const Welcome = () => {
-  const { connectWallet, connectedAccount } = useTransactionContext();
+  const {
+    connectWallet,
+    connectedAccount,
+    formData,
+    handleChange,
+    setFormData,
+    sendTransaction,
+  } = useTransactionContext();
 
-  const handleChange = (e: HTMLInputElement, name: string) => {};
-
-  const handleSubmit = () => {};
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { addressTo, amount, keyword, message } = formData;
+    if (!addressTo || !amount || !keyword || !message) {
+      return;
+    }
+    sendTransaction();
+  };
   return (
     <div className="flex w-full justify-center items-center">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
@@ -96,33 +103,33 @@ const Welcome = () => {
               placeholder="Address To:"
               name="addressTo"
               type="text"
-              value=""
+              // value={addressTo}
               handleChange={handleChange}
             />
             <Input
               placeholder="Amount(ETH)"
               name="amount"
               type="number"
-              value=""
+              // value={amount}
               handleChange={handleChange}
             />
             <Input
               placeholder="Keyword (GIF)"
               name="keyword"
               type="text"
-              value=""
+              // value={keyword}
               handleChange={handleChange}
             />
             <Input
               placeholder="Enter Message"
               name="message"
               type="text"
-              value=""
+              // value={message}
               handleChange={handleChange}
             />
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {true ? (
+            {false ? (
               <Loader />
             ) : (
               <button
