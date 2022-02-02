@@ -12,6 +12,7 @@ interface ITransactionContext {
   sendTransaction: () => void;
   getEthereumContract: () => void;
   transactions: any[];
+  isLoading: boolean;
 }
 
 interface IFormData {
@@ -34,6 +35,7 @@ export const TransactionContext = createContext<ITransactionContext>({
   sendTransaction: () => {},
   getEthereumContract: () => {},
   transactions: [],
+  isLoading: false,
 });
 
 export const useTransactionContext = () => useContext(TransactionContext);
@@ -215,6 +217,7 @@ export const TransactionProvider = ({ children }: { children: any }) => {
         sendTransaction,
         getEthereumContract,
         transactions,
+        isLoading,
       }}
     >
       {children}
