@@ -39,8 +39,8 @@ const Welcome = () => {
     connectedAccount,
     formData,
     handleChange,
-    setFormData,
     sendTransaction,
+    isLoading,
   } = useTransactionContext();
 
   const handleSubmit = (e: any) => {
@@ -134,7 +134,7 @@ const Welcome = () => {
             />
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {false ? (
+            {isLoading ? (
               <Loader />
             ) : (
               <button
